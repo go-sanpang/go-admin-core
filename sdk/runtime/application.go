@@ -5,11 +5,9 @@ import (
 	"net/http"
 	"sync"
 
-	"github.com/casbin/casbin/v2"
-	"github.com/go-admin-team/go-admin-core/logger"
-	"github.com/go-admin-team/go-admin-core/storage"
-	"github.com/go-admin-team/go-admin-core/storage/queue"
-	"github.com/robfig/cron/v3"
+	"github.com/go-sanpang/go-admin-core/logger"
+	"github.com/go-sanpang/go-admin-core/storage"
+	"github.com/go-sanpang/go-admin-core/storage/queue"
 	"gorm.io/gorm"
 )
 

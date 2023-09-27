@@ -1,10 +1,10 @@
 package config
 
 import (
-	"github.com/go-admin-team/go-admin-core/storage"
-	"github.com/go-admin-team/go-admin-core/storage/queue"
 	"github.com/go-admin-team/redisqueue/v2"
 	"github.com/go-redis/redis/v9"
+	"github.com/go-sanpang/go-admin-core/storage"
+	"github.com/go-sanpang/go-admin-core/storage/queue"
 	"time"
 )
 
