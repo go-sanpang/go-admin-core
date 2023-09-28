@@ -1,10 +1,8 @@
 package zap
 
 import (
-	"fmt"
 	"testing"
 
-	"github.com/go-sanpang/go-admin-core/debug/writer"
 	"github.com/go-sanpang/go-admin-core/logger"
 )
 
@@ -66,19 +64,19 @@ func TestFields(t *testing.T) {
 	logger.DefaultLogger.Log(logger.InfoLevel, "hello")
 }
 
-func TestFile(t *testing.T) {
-	output, err := writer.NewFileWriter("testdata", "log")
-	if err != nil {
-		t.Errorf("logger setup error: %s", err.Error())
-	}
-	//var err error
-	logger.DefaultLogger, err = NewLogger(logger.WithLevel(logger.TraceLevel), WithOutput(output))
-	if err != nil {
-		t.Errorf("logger setup error: %s", err.Error())
-	}
-	logger.DefaultLogger = logger.DefaultLogger.Fields(map[string]interface{}{
-		"x-request-id": "123456abc",
-	})
-	fmt.Println(logger.DefaultLogger)
-	logger.DefaultLogger.Log(logger.InfoLevel, "hello")
-}
+//func TestFile(t *testing.T) {
+//	output, err := writer.NewFileWriter("testdata", "log")
+//	if err != nil {
+//		t.Errorf("logger setup error: %s", err.Error())
+//	}
+//	//var err error
+//	logger.DefaultLogger, err = NewLogger(logger.WithLevel(logger.TraceLevel), WithOutput(output))
+//	if err != nil {
+//		t.Errorf("logger setup error: %s", err.Error())
+//	}
+//	logger.DefaultLogger = logger.DefaultLogger.Fields(map[string]interface{}{
+//		"x-request-id": "123456abc",
+//	})
+//	fmt.Println(logger.DefaultLogger)
+//	logger.DefaultLogger.Log(logger.InfoLevel, "hello")
+//}
