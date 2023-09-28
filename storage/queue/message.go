@@ -1,7 +1,7 @@
 package queue
 
 import (
-	"github.com/go-admin-team/redisqueue/v2"
+	"github.com/go-sanpang/redisqueue"
 	"sync"
 
 	"github.com/go-sanpang/go-admin-core/storage"

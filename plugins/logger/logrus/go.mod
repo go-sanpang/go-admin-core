@@ -9,7 +9,7 @@ require (
 
 require (
 	github.com/magefile/mage v1.10.0 // indirect
-	golang.org/x/sys v0.11.0 // indirect
+	golang.org/x/sys v0.12.0 // indirect
 )
 
-replace github.com/go-sanpang/go-admin-core => ../../../
+//replace github.com/go-sanpang/go-admin-core => ../../../

@@ -3,11 +3,10 @@ package logrus
 import (
 	"context"
 	"fmt"
-	"os"
-
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-sanpang/go-admin-core/logger"
+	"os"
 )
 
 type entryLogger interface {
