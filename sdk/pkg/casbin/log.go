@@ -63,9 +63,22 @@ func (l *Logger) LogPolicy(policy map[string][][]string) {
 	logger.DefaultLogger.Fields(data).Log(logger.InfoLevel, nil)
 }
 
+func (l *Logger) LogError(err error, msg ...string) {
+	if !l.IsEnabled() {
+		return
+	}
+
+	data := make([]interface{}, len(msg)+1)
+	data = append(data, err)
+	for _, v := range msg {
+		data = append(data, v)
+	}
+	logger.DefaultLogger.Log(logger.ErrorLevel, data...)
+}
+
 //func (l *Logger) Print(v ...interface{}) {
 //	if l.IsEnabled() {
-//		logger.DefaultLogger.Log(logger.InfoLevel, v...)
+//		logger.DefaultLogger.Log(logger.InfoLevel, msg...)
 //	}
 //}
 //
