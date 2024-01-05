@@ -10,11 +10,6 @@ import (
 	"go.uber.org/zap/zapcore"
 )
 
-const (
-	defaultTimeZone   = `Asia/Dubai`              //  默认时区
-	defaultTimeLayout = `2006-01-02 15:04:05.000` //  默认时间格式
-)
-
 var (
 	encoder     zapcore.Encoder
 	writeSyncer zapcore.WriteSyncer
@@ -22,7 +17,7 @@ var (
 )
 
 // Build 构建日志器
-func Build(lConfig LogConfig, cores ...zapcore.Core) (logger *Logger) {
+func Build(lConfig *LogConfig, cores ...zapcore.Core) (logger *Logger) {
 	var (
 		err              error
 		underlyingLogger *zap.Logger
@@ -37,12 +32,6 @@ func Build(lConfig LogConfig, cores ...zapcore.Core) (logger *Logger) {
 		Encoding:         "console",
 		OutputPaths:      []string{"stderr"},
 		ErrorOutputPaths: []string{"stderr"},
-	}
-
-	lConfig.TimeZone = defaultTimeZone // 固定为本地方便查看日志
-
-	if lConfig.TimeLayout == `` {
-		lConfig.TimeLayout = defaultTimeLayout
 	}
 
 	location, err := time.LoadLocation(lConfig.TimeZone)
