@@ -71,7 +71,7 @@ func (e *NSQ) newConsumer(topic string, h nsq.Handler) (err error) {
 }
 
 // Append 消息入生产者
-func (e *NSQ) Append(message storage.Messager) error {
+func (e *NSQ) Append(message storage.Message) error {
 	rb, err := json.Marshal(message.GetValues())
 	if err != nil {
 		return err

@@ -12,7 +12,7 @@ import (
 	"path"
 	"time"
 
-	"github.com/go-sanpang/go-admin-core/logger"
+	"github.com/go-sanpang/go-admin-core/debug/logger"
 	"github.com/go-sanpang/go-admin-core/server/grpc/interceptors/logging/ctxlog"
 	"google.golang.org/grpc"
 )

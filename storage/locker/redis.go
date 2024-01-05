@@ -20,7 +20,7 @@ type Redis struct {
 	mutex  *redislock.Client
 }
 
-func (Redis) String() string {
+func (*Redis) String() string {
 	return "redis"
 }
 

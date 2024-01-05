@@ -3,23 +3,20 @@ package api
 import (
 	"errors"
 	"fmt"
+	"github.com/go-sanpang/go-admin-core/helper"
+	"github.com/go-sanpang/go-admin-core/helper/response"
 
 	"net/http"
 
 	vd "github.com/bytedance/go-tagexpr/v2/validator"
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
-	"github.com/go-sanpang/go-admin-core/logger"
+	"github.com/go-sanpang/go-admin-core/debug/logger"
 	"github.com/go-sanpang/go-admin-core/sdk"
-	"github.com/go-sanpang/go-admin-core/sdk/pkg"
-	"github.com/go-sanpang/go-admin-core/sdk/pkg/response"
 	"github.com/go-sanpang/go-admin-core/sdk/service"
 	"github.com/go-sanpang/go-admin-core/storage"
-	"github.com/go-sanpang/go-admin-core/tools/language"
 	"gorm.io/gorm"
 )
-
-var DefaultLanguage = "zh-CN"
 
 type Api struct {
 	Context *gin.Context
@@ -46,7 +43,7 @@ func (e *Api) MakeContext(c *gin.Context) *Api {
 }
 
 // GetLogger 获取上下文提供的日志
-func (e Api) GetLogger() *logger.Helper {
+func (e *Api) GetLogger() *logger.Helper {
 	return GetRequestLogger(e.Context)
 }
 
@@ -82,8 +79,8 @@ func (e *Api) Bind(d interface{}, bindings ...binding.Binding) *Api {
 }
 
 // GetOrm 获取Orm DB
-func (e Api) GetOrm() (*gorm.DB, error) {
-	db, err := pkg.GetOrm(e.Context)
+func (e *Api) GetOrm() (*gorm.DB, error) {
+	db, err := helper.GetOrm(e.Context)
 	if err != nil {
 		e.Logger.Error(http.StatusInternalServerError, err, "数据库连接获取失败")
 		return nil, err
@@ -99,7 +96,7 @@ func (e *Api) MakeOrm() *Api {
 		e.AddError(err)
 		return e
 	}
-	db, err := pkg.GetOrm(e.Context)
+	db, err := helper.GetOrm(e.Context)
 	if err != nil {
 		e.Logger.Error(http.StatusInternalServerError, err, "数据库连接获取失败")
 		e.AddError(err)
@@ -117,34 +114,25 @@ func (e *Api) MakeService(c *service.Service) *Api {
 }
 
 // Error 通常错误数据处理
-func (e Api) Error(code int, err error, msg string) {
+func (e *Api) Error(code int, err error, msg string) {
 	response.Error(e.Context, code, err, msg)
 }
 
 // OK 通常成功数据处理
-func (e Api) OK(data interface{}, msg string) {
+func (e *Api) OK(data interface{}, msg string) {
 	response.OK(e.Context, data, msg)
 }
 
 // PageOK 分页数据处理
-func (e Api) PageOK(result interface{}, count int, pageIndex int, pageSize int, msg string) {
+func (e *Api) PageOK(result interface{}, count int, pageIndex int, pageSize int, msg string) {
 	response.PageOK(e.Context, result, count, pageIndex, pageSize, msg)
 }
 
 // Custom 兼容函数
-func (e Api) Custom(data gin.H) {
+func (e *Api) Custom(data gin.H) {
 	response.Custum(e.Context, data)
 }
 
-func (e Api) Translate(form, to interface{}) {
-	pkg.Translate(form, to)
-}
-
-// getAcceptLanguage 获取当前语言
-func (e *Api) getAcceptLanguage() string {
-	languages := language.ParseAcceptLanguage(e.Context.GetHeader("Accept-Language"), nil)
-	if len(languages) == 0 {
-		return DefaultLanguage
-	}
-	return languages[0]
+func (e *Api) Translate(form, to interface{}) {
+	helper.Translate(form, to)
 }

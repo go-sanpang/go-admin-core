@@ -12,7 +12,7 @@ import (
 	"net"
 	"net/http"
 
-	log "github.com/go-sanpang/go-admin-core/logger"
+	log "github.com/go-sanpang/go-admin-core/debug/logger"
 	"github.com/go-sanpang/go-admin-core/server"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )

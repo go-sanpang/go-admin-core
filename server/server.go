@@ -13,7 +13,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/go-sanpang/go-admin-core/logger"
+	"github.com/go-sanpang/go-admin-core/debug/logger"
 )
 
 type Server struct {

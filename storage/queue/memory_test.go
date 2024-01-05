@@ -19,7 +19,7 @@ func TestMemory_Append(t *testing.T) {
 	}
 	type args struct {
 		name    string
-		message storage.Messager
+		message storage.Message
 	}
 	tests := []struct {
 		name    string
@@ -76,7 +76,7 @@ func TestMemory_Register(t *testing.T) {
 			fields{},
 			args{
 				name: "test",
-				f: func(message storage.Messager) error {
+				f: func(message storage.Message) error {
 					fmt.Println(message.GetValues())
 					return nil
 				},

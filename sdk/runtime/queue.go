@@ -25,7 +25,7 @@ func (e *Queue) Register(name string, f storage.ConsumerFunc) {
 }
 
 // Append 增加数据到生产者
-func (e *Queue) Append(message storage.Messager) error {
+func (e *Queue) Append(message storage.Message) error {
 	values := message.GetValues()
 	if values == nil {
 		values = make(map[string]interface{})

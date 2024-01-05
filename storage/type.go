@@ -24,13 +24,13 @@ type AdapterCache interface {
 
 type AdapterQueue interface {
 	String() string
-	Append(message Messager) error
+	Append(message Message) error
 	Register(name string, f ConsumerFunc)
 	Run()
 	Shutdown()
 }
 
-type Messager interface {
+type Message interface {
 	SetID(string)
 	SetStream(string)
 	SetValues(map[string]interface{})
@@ -43,7 +43,7 @@ type Messager interface {
 	GetErrorCount() int
 }
 
-type ConsumerFunc func(Messager) error
+type ConsumerFunc func(Message) error
 
 type AdapterLocker interface {
 	String() string

@@ -5,15 +5,15 @@ import (
 	"fmt"
 	vd "github.com/bytedance/go-tagexpr/v2/validator"
 	"github.com/gin-gonic/gin/binding"
+	"github.com/go-sanpang/go-admin-core/helper"
+	"github.com/go-sanpang/go-admin-core/helper/response/antd"
 	"github.com/go-sanpang/go-admin-core/sdk/service"
 	"net/http"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/go-sanpang/go-admin-core/logger"
+	"github.com/go-sanpang/go-admin-core/debug/logger"
 	"github.com/go-sanpang/go-admin-core/sdk/api"
-	"github.com/go-sanpang/go-admin-core/sdk/pkg"
-	"github.com/go-sanpang/go-admin-core/sdk/pkg/response/antd"
 	"gorm.io/gorm"
 )
 
@@ -31,7 +31,7 @@ func (e Api) GetLogger() *logger.Helper {
 
 // GetOrm 获取Orm DB
 func (e *Api) GetOrm(c *gin.Context) (*gorm.DB, error) {
-	db, err := pkg.GetOrm(c)
+	db, err := helper.GetOrm(c)
 	if err != nil {
 		e.Error(http.StatusInternalServerError, "数据库连接获取失败", "9")
 		return nil, err
@@ -110,7 +110,7 @@ func (e *Api) MakeOrm() *Api {
 		e.AddError(err)
 		return e
 	}
-	db, err := pkg.GetOrm(e.Context)
+	db, err := helper.GetOrm(e.Context)
 	if err != nil {
 		e.Logger.Error(http.StatusInternalServerError, err, "数据库连接获取失败")
 		e.AddError(err)
@@ -135,5 +135,5 @@ func (e *Api) AddError(err error) {
 }
 
 func (e Api) Translate(form, to interface{}) {
-	pkg.Translate(form, to)
+	helper.Translate(form, to)
 }

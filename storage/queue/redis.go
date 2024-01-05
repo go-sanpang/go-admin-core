@@ -49,7 +49,7 @@ func (r *Redis) newProducer(options *redisqueue.ProducerOptions) (*redisqueue.Pr
 	return redisqueue.NewProducerWithOptions(options)
 }
 
-func (r *Redis) Append(message storage.Messager) error {
+func (r *Redis) Append(message storage.Message) error {
 	err := r.producer.Enqueue(&redisqueue.Message{
 		ID:     message.GetID(),
 		Stream: message.GetStream(),

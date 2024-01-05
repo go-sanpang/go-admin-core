@@ -22,7 +22,7 @@ func TestRedis_Append(t *testing.T) {
 	}
 	type args struct {
 		name    string
-		message storage.Messager
+		message storage.Message
 	}
 	client := redis.NewClient(&redis.Options{})
 	tests := []struct {
@@ -116,7 +116,7 @@ func TestRedis_Register(t *testing.T) {
 			},
 			args{
 				name: "login_log_queue",
-				f: func(message storage.Messager) error {
+				f: func(message storage.Message) error {
 					fmt.Println("ok")
 					fmt.Println(message.GetValues())
 					return nil

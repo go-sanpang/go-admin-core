@@ -79,7 +79,7 @@ func TestQueue_Register(t *testing.T) {
 			},
 			args{
 				name: "operate_log_queue",
-				f: func(m storage.Messager) error {
+				f: func(m storage.Message) error {
 					fmt.Println(m.GetValues())
 					return nil
 				},

@@ -9,7 +9,7 @@ import (
 	"github.com/go-sanpang/go-admin-core/storage"
 )
 
-type queue chan storage.Messager
+type queue chan storage.Message
 
 // NewMemory 内存模式
 func NewMemory(poolNum uint) *Memory {
@@ -37,7 +37,7 @@ func (m *Memory) makeQueue() queue {
 	return make(queue, m.PoolNum)
 }
 
-func (m *Memory) Append(message storage.Messager) error {
+func (m *Memory) Append(message storage.Message) error {
 	m.mutex.RLock()
 	defer m.mutex.RUnlock()
 	memoryMessage := new(Message)
@@ -60,7 +60,7 @@ func (m *Memory) Append(message storage.Messager) error {
 		q = m.makeQueue()
 		m.queue.Store(message.GetStream(), q)
 	}
-	go func(gm storage.Messager, gq queue) {
+	go func(gm storage.Message, gq queue) {
 		gm.SetID(uuid.New().String())
 		gq <- gm
 	}(memoryMessage, q)

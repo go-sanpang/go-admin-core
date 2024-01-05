@@ -1,6 +1,6 @@
 package config
 
-import "github.com/go-sanpang/go-admin-core/sdk/pkg/logger"
+import "github.com/go-sanpang/go-admin-core/helper/logger"
 
 type Logger struct {
 	Type      string

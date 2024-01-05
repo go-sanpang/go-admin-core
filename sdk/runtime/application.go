@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"sync"
 
-	"github.com/go-sanpang/go-admin-core/logger"
+	"github.com/go-sanpang/go-admin-core/debug/logger"
 	"github.com/go-sanpang/go-admin-core/storage"
 	"github.com/go-sanpang/go-admin-core/storage/queue"
 	"gorm.io/gorm"
@@ -240,7 +240,7 @@ func (e *Application) GetHandlerPrefix(key string) []func(r *gin.RouterGroup, ha
 }
 
 // GetStreamMessage 获取队列需要用的message
-func (e *Application) GetStreamMessage(id, stream string, value map[string]interface{}) (storage.Messager, error) {
+func (e *Application) GetStreamMessage(id, stream string, value map[string]interface{}) (storage.Message, error) {
 	message := &queue.Message{}
 	message.SetID(id)
 	message.SetStream(stream)

@@ -14,7 +14,7 @@ import (
 	"net"
 	"sync"
 
-	log "github.com/go-sanpang/go-admin-core/logger"
+	log "github.com/go-sanpang/go-admin-core/debug/logger"
 	middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	prometheus "github.com/grpc-ecosystem/go-grpc-prometheus"
 	"google.golang.org/grpc"

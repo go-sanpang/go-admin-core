@@ -13,8 +13,8 @@ import (
 	"math"
 	"time"
 
+	log "github.com/go-sanpang/go-admin-core/debug/logger"
 	pbErr "github.com/go-sanpang/go-admin-core/errors"
-	log "github.com/go-sanpang/go-admin-core/logger"
 	"github.com/go-sanpang/go-admin-core/server/grpc/interceptors/logging"
 	requesttag "github.com/go-sanpang/go-admin-core/server/grpc/interceptors/request_tag"
 	recovery "github.com/grpc-ecosystem/go-grpc-middleware/recovery"

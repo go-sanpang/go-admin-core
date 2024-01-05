@@ -32,7 +32,9 @@ type reporter struct {
 	c *gin.Context
 }
 
-func (r *reporter) Method() string { return r.c.Request.Method }
+func (r *reporter) Method() string {
+	return r.c.Request.Method
+}
 
 func (r *reporter) Context() context.Context { return r.c.Request.Context() }
 

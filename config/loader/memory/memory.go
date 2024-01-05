@@ -23,7 +23,7 @@ type memory struct {
 	// the current snapshot
 	snap *loader.Snapshot
 	// the current values
-	vals reader.Values
+	values reader.Values
 	// all the sets
 	sets []*source.ChangeSet
 	// all the sources
@@ -69,7 +69,7 @@ func (m *memory) watch(idx int, s source.Source) {
 			}
 
 			// set values
-			m.vals, _ = m.opts.Reader.Values(set)
+			m.values, _ = m.opts.Reader.Values(set)
 			m.snap = &loader.Snapshot{
 				ChangeSet: set,
 				Version:   genVer(),
@@ -121,7 +121,7 @@ func (m *memory) watch(idx int, s source.Source) {
 func (m *memory) loaded() bool {
 	var loaded bool
 	m.RLock()
-	if m.vals != nil {
+	if m.values != nil {
 		loaded = true
 	}
 	m.RUnlock()
@@ -140,7 +140,7 @@ func (m *memory) reload() error {
 	}
 
 	// set values
-	m.vals, _ = m.opts.Reader.Values(set)
+	m.values, _ = m.opts.Reader.Values(set)
 	m.snap = &loader.Snapshot{
 		ChangeSet: set,
 		Version:   genVer(),
@@ -162,7 +162,7 @@ func (m *memory) update() {
 		watchers = append(watchers, e.Value.(*watcher))
 	}
 
-	vals := m.vals
+	vals := m.values
 	snap := m.snap
 	m.RUnlock()
 
@@ -237,7 +237,7 @@ func (m *memory) Sync() error {
 		m.Unlock()
 		return err
 	}
-	m.vals = vals
+	m.values = vals
 	m.snap = &loader.Snapshot{
 		ChangeSet: set,
 		Version:   genVer(),
@@ -276,12 +276,12 @@ func (m *memory) Get(path ...string) (reader.Value, error) {
 	defer m.Unlock()
 
 	// did sync actually work?
-	if m.vals != nil {
-		return m.vals.Get(path...), nil
+	if m.values != nil {
+		return m.values.Get(path...), nil
 	}
 
-	// assuming vals is nil
-	// create new vals
+	// assuming values is nil
+	// create new values
 
 	ch := m.snap.ChangeSet
 
@@ -292,10 +292,10 @@ func (m *memory) Get(path ...string) (reader.Value, error) {
 	}
 
 	// lets set it just because
-	m.vals = v
+	m.values = v
 
-	if m.vals != nil {
-		return m.vals.Get(path...), nil
+	if m.values != nil {
+		return m.values.Get(path...), nil
 	}
 
 	// ok we're going hardcore now

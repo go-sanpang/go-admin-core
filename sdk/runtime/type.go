@@ -6,7 +6,7 @@ import (
 	"github.com/robfig/cron/v3"
 	"net/http"
 
-	"github.com/go-sanpang/go-admin-core/logger"
+	"github.com/go-sanpang/go-admin-core/debug/logger"
 	"github.com/go-sanpang/go-admin-core/storage"
 	"gorm.io/gorm"
 )
@@ -59,7 +59,7 @@ type Runtime interface {
 	GetHandler() map[string][]func(r *gin.RouterGroup, hand ...*gin.HandlerFunc)
 	GetHandlerPrefix(key string) []func(r *gin.RouterGroup, hand ...*gin.HandlerFunc)
 
-	GetStreamMessage(id, stream string, value map[string]interface{}) (storage.Messager, error)
+	GetStreamMessage(id, stream string, value map[string]interface{}) (storage.Message, error)
 
 	GetConfig(key string) interface{}
 	SetConfig(key string, value interface{})

@@ -12,7 +12,7 @@ import (
 	"fmt"
 	"time"
 
-	log "github.com/go-sanpang/go-admin-core/logger"
+	log "github.com/go-sanpang/go-admin-core/debug/logger"
 	"github.com/go-sanpang/go-admin-core/server/grpc/interceptors/logging"
 	reqtags "github.com/go-sanpang/go-admin-core/server/grpc/interceptors/request_tag"
 	middleware "github.com/grpc-ecosystem/go-grpc-middleware"
