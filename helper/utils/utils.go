@@ -77,9 +77,9 @@ func GetCurrentTimeStamp() int64 {
 	return time.Now().UnixNano() / 1e6
 }
 
-//slice去重
+// RemoveRepByMap slice去重
 func RemoveRepByMap(slc []string) []string {
-	result := []string{}
+	var result []string
 	tempMap := map[string]byte{}
 	for _, e := range slc {
 		l := len(tempMap)
