@@ -4,7 +4,6 @@ import (
 	"os"
 	"strings"
 
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 )
@@ -100,8 +99,8 @@ func (l *Logger) SetLevel(level zapcore.Level) *Logger {
 	return newLogger(lg, l.name, l.skip, true, l.fields...)
 }
 
-func (l *Logger) Start() *Logger {
-	return l.With(zap.String(`任务ID`, primitive.NewObjectID().Hex()))
+func (l *Logger) Start(taskId string) *Logger {
+	return l.With(zap.String(`任务ID`, taskId))
 }
 
 func (l *Logger) AddCallerSkip(skip int) *Logger {

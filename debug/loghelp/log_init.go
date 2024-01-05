@@ -19,11 +19,11 @@ func Get() *Logger {
 	return l
 }
 
-func GetLogger(name, key string, config LogConfig) *Logger {
+func GetLogger(name, key string, config *LogConfig) *Logger {
 	return l.Derive(name).SetLevel(getLevel(key, config)).AddCallerSkip(1)
 }
 
-func getLevel(key string, config LogConfig) zapcore.Level {
+func getLevel(key string, config *LogConfig) zapcore.Level {
 	if _, exist := config.LogLevel.Specific[key]; exist {
 		return config.LogLevel.Specific[key]
 	}
